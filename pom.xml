@@ -9,6 +9,7 @@
   <version>1.0-SNAPSHOT</version>
   <modules>
     <module>mq-activemq</module>
+    <module>java-core</module>
   </modules>
   <packaging>pom</packaging>
 
