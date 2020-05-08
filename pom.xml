@@ -10,6 +10,7 @@
   <modules>
     <module>mq-activemq</module>
     <module>java-core</module>
+      <module>spring-basic</module>
   </modules>
   <packaging>pom</packaging>
 
