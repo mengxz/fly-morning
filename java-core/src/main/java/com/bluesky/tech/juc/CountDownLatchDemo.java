@@ -2,6 +2,9 @@ package com.bluesky.tech.juc;
 
 import java.util.concurrent.*;
 
+/**
+ * 所有人员走了才能锁门
+ */
 public class CountDownLatchDemo {
     public static void main(String[] args) {
         //test01();
