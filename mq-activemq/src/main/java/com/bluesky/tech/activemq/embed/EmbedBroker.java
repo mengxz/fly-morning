@@ -1,4 +1,4 @@
-package com.bluesky.teck.activemq.queue;
+package com.bluesky.tech.activemq.embed;
 
 import org.apache.activemq.broker.BrokerService;
 

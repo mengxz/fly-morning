@@ -1,10 +1,10 @@
-package com.bluesky.teck.activemq.queue;
+package com.bluesky.tech.activemq.queue;
 
 import org.apache.activemq.ActiveMQConnectionFactory;
 
 import javax.jms.*;
 
-public class JmsMapProduce {
+public class JmsProduce {
     public static final String ACTIVEMQ_URL = "tcp://localhost:61616";
     public static final String QUEUE_NAME = "queue01";
 
@@ -14,22 +14,16 @@ public class JmsMapProduce {
         connection.start();
         Session session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
         Queue queue = session.createQueue(QUEUE_NAME);
+        //创建消息的生产者
         MessageProducer producer = session.createProducer(queue);
+        //通过使用messageProducer生产消息发送至mq队列中
         for (int i = 0; i < 3; i++) {
+            //创建消息
             TextMessage textMessage = session.createTextMessage("mag i" + i);
-            //消息属性
-            if(i==2){
-                textMessage.setBooleanProperty("isVip",Boolean.TRUE);
-            }else {
-                textMessage.setBooleanProperty("isVip",Boolean.FALSE);
-            }
+            //通过messageProducer发送给mq
             producer.send(textMessage);
-            //发送map类型消息
-            MapMessage mapMessage = session.createMapMessage();
-            mapMessage.setString("k1","mapMessage--v"+i);
-            mapMessage.setInt("intKey",100+i);
-            producer.send(mapMessage);
         }
+        //关闭资源
         producer.close();
         session.close();
         connection.close();
