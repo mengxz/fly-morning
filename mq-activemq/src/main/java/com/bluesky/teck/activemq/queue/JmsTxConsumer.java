@@ -5,7 +5,7 @@ import org.apache.activemq.ActiveMQConnectionFactory;
 import javax.jms.*;
 import java.io.IOException;
 
-public class JmsConsumer {
+public class JmsTxConsumer {
     public static final String ACTIVEMQ_URL = "tcp://localhost:61616";
     public static final String QUEUE_NAME = "queue01";
 
