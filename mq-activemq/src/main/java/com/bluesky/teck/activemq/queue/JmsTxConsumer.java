@@ -10,7 +10,6 @@ public class JmsTxConsumer {
     public static final String QUEUE_NAME = "queue01";
 
     public static void main(String[] args) throws Exception {
-        //testReceiveMethod();
         testListenMethod();
     }
 
@@ -21,7 +20,8 @@ public class JmsTxConsumer {
         Connection connection = factory.createConnection();
         connection.start();
         //3创建会后，第一个叫事务，第二个叫签收
-        Session session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
+        //Session session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
+        Session session = connection.createSession(true, Session.AUTO_ACKNOWLEDGE);
         //4创建目的地
         Queue queue = session.createQueue(QUEUE_NAME);
         //创建消费者
@@ -34,6 +34,8 @@ public class JmsTxConsumer {
                     TextMessage textMessage = (TextMessage)message;
                     try {
                         System.out.println("receive msg:" + textMessage.getText());
+                        //事务开启需要commit
+                        session.commit();
                     } catch (JMSException e) {
                         e.printStackTrace();
                     }
@@ -47,29 +49,4 @@ public class JmsTxConsumer {
         System.out.println("*****finish******");
     }
 
-    /**
-     * receive
-     * @throws JMSException
-     */
-    private static void testReceiveMethod() throws JMSException {
-        ActiveMQConnectionFactory factory = new ActiveMQConnectionFactory(ACTIVEMQ_URL);
-        Connection connection = factory.createConnection();
-        connection.start();
-        Session session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
-        Queue queue = session.createQueue(QUEUE_NAME);
-        MessageConsumer consumer = session.createConsumer(queue);
-        while(true){
-            //TextMessage textMessage = (TextMessage)consumer.receive();
-            TextMessage textMessage = (TextMessage)consumer.receive(3000L);
-            if(null != textMessage){
-                System.out.println("receive msg:" + textMessage.getText());
-            }else {
-                break;
-            }
-        }
-        consumer.close();
-        session.close();
-        connection.close();
-        System.out.println("*****finish******");
-    }
 }
