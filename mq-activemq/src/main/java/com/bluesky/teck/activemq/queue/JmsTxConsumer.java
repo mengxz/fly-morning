@@ -10,6 +10,9 @@ public class JmsTxConsumer {
     public static final String QUEUE_NAME = "queue01";
 
     public static void main(String[] args) throws Exception {
+        //事务大于签收
+        //在事务性会话中，当一个事务被成功提交则消息被自动签收；如果事务回滚，则消息会被再次传送；
+        //在非事务性会话中，消息何时被确认取决于创建会话时的应答模式，是否ack
         //测试事务
         //testTxMethod();
         //测试签收ack
