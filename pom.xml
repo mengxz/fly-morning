@@ -11,6 +11,7 @@
     <module>mq-activemq</module>
     <module>java-core</module>
       <module>spring-basic</module>
+      <module>mq-activemq-springboot</module>
   </modules>
   <packaging>pom</packaging>
 
