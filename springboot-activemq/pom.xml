@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>mq-activemq-springboot</artifactId>
+    <artifactId>springboot-activemq</artifactId>
 
     <dependencies>
         <dependency>
