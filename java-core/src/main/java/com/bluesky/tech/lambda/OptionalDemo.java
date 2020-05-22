@@ -1,4 +1,4 @@
-package com.bluesky.teck.lambda;
+package com.bluesky.tech.lambda;
 
 import java.util.OptionalInt;
 import java.util.stream.IntStream;

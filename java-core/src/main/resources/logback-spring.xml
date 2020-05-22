@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true" scanPeriod="30 seconds">
+
+    <springProperty scope="context" name="logLevel" source="log.level" />
+    <springProperty scope="context" name="logPath" source="log.path" defaultValue="/data/logs/java-default" />
+    <property scope="context" name="FILE_NAME" value="javaCore" />
+    <property name="encoding" value="UTF-8"/>
+    <property name="normal-pattern"
+              value="[%d{yyyy-MM-dd HH:mm:ss.SSS} %5p %c:%L] [clientIp:%X{clientIp}] [%thread] [test:%X{test}] [sessionId:%X{sessionId}] [traceId:%X{traceId}] %-5level %msg%n"/>
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${normal-pattern}</pattern>
+            <charset>${encoding}</charset>
+        </encoder>
+    </appender>
+    <appender name="FILEOUT" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${logPath}/${FILE_NAME}.log</file>
+        <append>false</append>
+        <!-- 日志文件的格式 -->
+        <encoder>
+            <pattern>${normal-pattern}</pattern>
+            <charset>${encoding}</charset>
+        </encoder>
+        <!-- 示例：每天生成一个日志文件，保存90天的日志文件 -->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${logPath}/${FILE_NAME}.%d{yyyy-MM-dd-HH}.log.gz</fileNamePattern>
+            <maxHistory>1200</maxHistory>
+        </rollingPolicy>
+    </appender>
+
+    <!-- 性能优化跟踪日志 -->
+    <appender name="OPTIMIZATION" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${logPath}/optimization.log</file>
+        <append>false</append>
+        <!-- 日志文件的格式 -->
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} Line:%-3L - %m%n</pattern>
+            <charset>utf-8</charset>
+        </encoder>
+        <!-- 示例：每天生成一个日志文件，保存90天的日志文件 -->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${logPath}/optimization.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>90</maxHistory>
+        </rollingPolicy>
+    </appender>
+
+
+    <appender name="OPTIMIZATION_APPENDER" class="ch.qos.logback.classic.AsyncAppender">
+        <discardingThreshold>0</discardingThreshold>
+        <queueSize>10000</queueSize>
+        <appender-ref ref="OPTIMIZATION"/>
+    </appender>
+
+    <logger name="OPTIMIZATION_LOGGER" level="DEBUG" additivity="false">
+        <appender-ref ref="OPTIMIZATION_APPENDER"/>
+    </logger>
+
+    <appender name="ASYNC_FILE" class="ch.qos.logback.classic.AsyncAppender">
+        <discardingThreshold>0</discardingThreshold>
+        <includeCallerData>true</includeCallerData>
+        <queueSize>10000</queueSize>
+        <appender-ref ref="FILEOUT"/>
+        <!--<appender-ref ref="STDOUT"/>-->
+    </appender>
+
+
+
+    <logger name="com.bluesky.tech.uc.client" level="ERROR"/>
+    <logger name="com.bluesky.tech" level="info"/>
+    <!--<logger name="com.bluesky.tech.dao" level="debug"/>-->
+
+    <root level="${logLevel}">
+        <appender-ref ref="STDOUT" />
+        <!--<appender-ref ref="FILEOUT" />-->
+        <appender-ref ref="ASYNC_FILE" />
+    </root>
+</configuration>
