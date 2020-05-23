@@ -38,7 +38,7 @@ public class ObjectFieldDemo {
         try {
             // 获取obj类的字节文件对象
             Class c = object.getClass();
-            log.info("class name:",c.getName());
+            log.info("class name:{}",c.getName());
             // 获取该类的成员变量
             Field f = c.getDeclaredField(fieldName);
             // 取消语言访问检查
