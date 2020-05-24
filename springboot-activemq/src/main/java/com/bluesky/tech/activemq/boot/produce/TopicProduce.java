@@ -7,26 +7,22 @@ import org.springframework.jms.core.JmsMessagingTemplate;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
-import javax.jms.Queue;
+import javax.jms.Topic;
 import java.util.UUID;
 
 
-//@Component
+@Component
 @EnableJms //重点开启注解
 @Slf4j
-public class QueueProduce {
+public class TopicProduce {
     @Autowired
     private JmsMessagingTemplate jmsMessagingTemplate;
     @Autowired
-    private Queue queue;
-
-    public void produceMsg(){
-        jmsMessagingTemplate.convertAndSend(queue,"msg:"+ UUID.randomUUID().toString().substring(0,6));
-    }
+    private Topic topic;
 
     @Scheduled(fixedDelay = 3000L)
     public void produceMsgSchedule(){
-        jmsMessagingTemplate.convertAndSend(queue,"schedule msg:"+ UUID.randomUUID().toString().substring(0,6));
-        log.info("produceMsgSchedule send msg ok");
+        jmsMessagingTemplate.convertAndSend(topic,"topic schedule msg:"+ UUID.randomUUID().toString().substring(0,6));
+        log.info("topic produceMsgSchedule send msg ok");
     }
 }

@@ -7,7 +7,8 @@ spring:
     user: admin
     password: admin
   jms:
-    pub-sub-domain: false  #false=不是订阅模式，走Queue；true=订阅模式，走Topic
+    pub-sub-domain: true  #false=不是订阅模式，走Queue；true=订阅模式，走Topic
 
 #队列名称
 myqueue: boot-mq-queue
+mytopic: boot-mq-topic

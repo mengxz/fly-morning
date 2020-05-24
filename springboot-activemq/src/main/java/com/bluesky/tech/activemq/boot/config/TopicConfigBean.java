@@ -1,19 +1,19 @@
 package com.bluesky.tech.activemq.boot.config;
 
-import org.apache.activemq.command.ActiveMQQueue;
+import org.apache.activemq.command.ActiveMQTopic;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
-import javax.jms.Queue;
+import javax.jms.Topic;
 
 @Component
-public class ConfigBean {
-    @Value("${myqueue}")
-    private String myQueue;
+public class TopicConfigBean {
+    @Value("${mytopic}")
+    private String myTopic;
 
     @Bean
-    public Queue queue(){
-        return new ActiveMQQueue(myQueue);
+    public Topic topic(){
+        return new ActiveMQTopic(myTopic);
     }
 }
