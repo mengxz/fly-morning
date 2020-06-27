@@ -13,6 +13,7 @@
     <module>spring-basic</module>
     <module>springboot-activemq</module>
       <module>java-algorithm</module>
+      <module>java-lucene</module>
   </modules>
   <packaging>pom</packaging>
 
