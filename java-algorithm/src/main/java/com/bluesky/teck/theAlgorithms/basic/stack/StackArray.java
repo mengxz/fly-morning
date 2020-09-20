@@ -23,9 +23,14 @@ public class StackArray {
         StackArray myStackArray = new StackArray(4);
 
         // Populate the stack
-        myStackArray.push(5);
-        myStackArray.push(8);
+        myStackArray.push(1);
         myStackArray.push(2);
+        myStackArray.push(3);
+        myStackArray.push(4);
+        myStackArray.push(5);
+        myStackArray.push(6);
+        myStackArray.push(7);
+        myStackArray.push(8);
         myStackArray.push(9);
 
         System.out.println("*********************Stack Array Implementation*********************");
@@ -34,6 +39,15 @@ public class StackArray {
         System.out.println(myStackArray.peek()); // will print 9
         System.out.println(myStackArray.pop()); // will print 9
         System.out.println(myStackArray.peek()); // will print 2
+        System.out.println(myStackArray.pop());
+        System.out.println(myStackArray.pop());
+        System.out.println(myStackArray.pop());
+        System.out.println(myStackArray.pop());
+        System.out.println(myStackArray.pop());
+        System.out.println(myStackArray.pop());
+        System.out.println(myStackArray.pop());
+        System.out.println(myStackArray.pop());
+        System.out.println(myStackArray.pop());
     }
 
     /**
@@ -96,12 +110,11 @@ public class StackArray {
      */
     public int pop() {
         if (!isEmpty()) { // Checks for an empty stack
-            return stackArray[top--];
-        }
-
-        if (top < maxSize / 4) {
-            resize(maxSize / 2);
-            return pop();// don't forget pop after resizing
+            int tmp = stackArray[top--];
+            if (top < maxSize / 4) {
+                resize(maxSize / 2);
+            }
+            return tmp;
         } else {
             System.out.println("The stack is already empty");
             return -1;
@@ -124,8 +137,8 @@ public class StackArray {
 
     private void resize(int newSize) {
         int[] transferArray = new int[newSize];
-
-        for (int i = 0; i < stackArray.length; i++) {
+        int min = Math.min(newSize,stackArray.length);
+        for (int i = 0; i < min; i++) {
             transferArray[i] = stackArray[i];
         }
         // This reference change might be nice in here
