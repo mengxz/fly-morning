@@ -1,4 +1,4 @@
-package com.bluesky.teck.theAlgorithms.DataStructures.Queues;
+package com.bluesky.teck.theAlgorithms.basic.queue;
 
 import java.util.ArrayList;
 

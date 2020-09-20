@@ -1,4 +1,4 @@
-package com.bluesky.teck.theAlgorithms.DataStructures.Stacks;
+package com.bluesky.teck.theAlgorithms.basic.stack;
 /**
 * Implementation of a stack using nodes.
 * Unlimited size, no arraylist.

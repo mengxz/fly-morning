@@ -1,4 +1,4 @@
-package com.bluesky.teck.theAlgorithms.DataStructures.Stacks;
+package com.bluesky.teck.theAlgorithms.basic.stack;
 
 /**
  * This class implements a Stack using a regular array.

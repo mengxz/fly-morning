@@ -1,4 +1,4 @@
-package com.bluesky.teck.theAlgorithms.DataStructures.Stacks;
+package com.bluesky.teck.theAlgorithms.basic.stack;
 
 import java.util.Stack;
 
