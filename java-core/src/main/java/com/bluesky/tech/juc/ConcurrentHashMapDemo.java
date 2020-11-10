@@ -11,7 +11,7 @@ public class ConcurrentHashMapDemo {
     }
 
     private static void safeMapTest() {
-        Map<String,String> map = new ConcurrentHashMap<>();
+        Map<String,String> map = new ConcurrentHashMap<>(100);
         for (int i = 1; i <= 30 ; i++) {
             final int tempInt = i;
             new Thread(() -> {
