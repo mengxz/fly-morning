@@ -14,6 +14,7 @@
     <module>springboot-activemq</module>
       <module>java-algorithm</module>
       <module>java-lucene</module>
+      <module>java-design-patterns</module>
   </modules>
   <packaging>pom</packaging>
 
