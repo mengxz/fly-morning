@@ -15,6 +15,7 @@
       <module>java-algorithm</module>
       <module>java-lucene</module>
       <module>java-design-patterns</module>
+    <module>java-jvm</module>
   </modules>
   <packaging>pom</packaging>
 
