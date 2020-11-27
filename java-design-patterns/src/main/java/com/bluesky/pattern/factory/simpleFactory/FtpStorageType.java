@@ -1,4 +1,4 @@
-package com.blueksy.pattern.factory.simpleFactory;
+package com.bluesky.pattern.factory.simpleFactory;
 
 public class FtpStorageType implements IStorageType {
     @Override

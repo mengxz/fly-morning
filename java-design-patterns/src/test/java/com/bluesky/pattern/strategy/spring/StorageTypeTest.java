@@ -1,4 +1,4 @@
-package com.blueksy.pattern.strategy.spring;
+package com.bluesky.pattern.strategy.spring;
 
 import org.junit.After;
 import org.junit.Before;

@@ -1,8 +1,8 @@
-package com.blueksy.pattern.factory.simpleFactory;
+package com.bluesky.pattern.factory.simpleFactory;
 
-import com.blueksy.pattern.strategy.FtpStorageStrategy;
-import com.blueksy.pattern.strategy.HdfsStorageStrategy;
-import com.blueksy.pattern.strategy.StorageContext;
+import com.bluesky.pattern.strategy.FtpStorageStrategy;
+import com.bluesky.pattern.strategy.HdfsStorageStrategy;
+import com.bluesky.pattern.strategy.StorageContext;
 
 /**
  * if else 版本的上传文件代码

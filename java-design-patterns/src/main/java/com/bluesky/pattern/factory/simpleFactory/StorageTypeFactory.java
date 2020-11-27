@@ -1,4 +1,4 @@
-package com.blueksy.pattern.factory.simpleFactory;
+package com.bluesky.pattern.factory.simpleFactory;
 
 /**
  * 简单工厂

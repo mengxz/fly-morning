@@ -1,4 +1,4 @@
-package com.blueksy.pattern.strategy;
+package com.bluesky.pattern.strategy;
 
 /**
  * 策略模式的上下文。

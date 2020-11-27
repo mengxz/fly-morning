@@ -1,4 +1,4 @@
-package com.blueksy.pattern.factory.simpleFactory;
+package com.bluesky.pattern.factory.simpleFactory;
 
 public class FastDfsStorageType implements IStorageType {
     @Override

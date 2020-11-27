@@ -1,4 +1,4 @@
-package com.blueksy.pattern.strategy;
+package com.bluesky.pattern.strategy;
 
 public class FtpStorageStrategy extends StorageStrategy {
     @Override
