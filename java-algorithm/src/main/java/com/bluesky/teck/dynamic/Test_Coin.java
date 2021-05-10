@@ -4,17 +4,49 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Test_Coin {
+    //记录已经计算的结果，避免重复计算
+    int[] resArr;
+    int count01= 0;
+    int count02 = 0;
+
 
     public static void main(String[] args) {
         Test_Coin demo = new Test_Coin();
         int[] arr = {1,2,5};
-        int amount = 102;
-        demo.test02(arr,amount);
+        int amount = 980;
+        demo.test04(arr,amount);
     }
 
-    int[] resArr;
-    int count01= 0;
-    int count02 = 0;
+    private int test04(int[]arr,int amount){
+        resArr = new int[amount+1];
+        Arrays.fill(resArr,-666);
+        int res = coinChange04(arr,amount);
+        printArr(resArr);
+        System.out.println("res="+res);
+        return res;
+    }
+
+    private int coinChange04(int[] arr, int amount){
+        if(amount == 0)
+            return 0;
+        if(amount < 0)
+            return -1;
+        if(resArr[amount] != -666){
+            return resArr[amount];
+        }
+        Integer res = Integer.MAX_VALUE;
+        for (int curCoinNum : arr) {
+            int subProblem = coinChange04(arr,amount - curCoinNum);
+            if(subProblem == -1)
+                continue;
+            res = Math.min(res,subProblem+1);
+        }
+        res = res == Integer.MAX_VALUE ? -1 : res;
+        resArr[amount] = res;
+        return res;
+    }
+
+
     private int test02(int[] arr,int amount){
         resArr = new int[amount+1];
         Arrays.fill(resArr,-666);
@@ -25,7 +57,6 @@ public class Test_Coin {
         System.out.println("i==" + i);
         return i;
     }
-
 
     private int coinChange02(int[] arr,int amount){
         count01++;
@@ -66,7 +97,12 @@ public class Test_Coin {
 
 
 
-
+    /**
+     * 有重复计算，复杂度高
+     * @param arr
+     * @param amount
+     * @return
+     */
     private int coinChange01(int[] arr,int amount){
         count01++;
         System.out.println("amount"+ amount);
@@ -85,8 +121,12 @@ public class Test_Coin {
         return res01 == Integer.MAX_VALUE ? -1 : res01;
     }
 
-
-
+    /**
+     * 有重复计算，复杂度高
+     * @param arr
+     * @param amount
+     * @return
+     */
     private int coinChange(int[] arr, int amount){
         if(amount == 0)
             return 0;

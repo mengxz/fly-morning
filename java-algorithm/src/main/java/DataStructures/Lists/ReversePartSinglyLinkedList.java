@@ -9,10 +9,10 @@ public class ReversePartSinglyLinkedList {
         ReversePartSinglyLinkedList demo = new ReversePartSinglyLinkedList();
         Node node = demo.genSinglyList();
         demo.print(node);
-//        Node reverse = demo.reverse(node);
+//        Node reverse = demo.reverse01(node);
 //        demo.print(reverse);
-//        Node reverse = demo.reverseN(node,3);
-//        demo.print(reverse);
+//        Node reverseN01 = demo.reverseN(node,3);
+//        demo.print(reverseN01);
         Node node1 = demo.reverseBetween(node, 2, 4);
         demo.print(node1);
     }
