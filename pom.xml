@@ -16,6 +16,7 @@
       <module>java-lucene</module>
       <module>java-design-patterns</module>
     <module>java-jvm</module>
+      <module>java-md</module>
   </modules>
   <packaging>pom</packaging>
 
