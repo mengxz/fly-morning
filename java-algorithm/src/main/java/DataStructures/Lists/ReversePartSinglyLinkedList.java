@@ -9,7 +9,7 @@ public class ReversePartSinglyLinkedList {
         ReversePartSinglyLinkedList demo = new ReversePartSinglyLinkedList();
         Node node = demo.genSinglyList();
         demo.print(node);
-//        Node reverse = demo.reverse01(node);
+//        Node reverse = demo.reverse(node);
 //        demo.print(reverse);
 //        Node reverseN01 = demo.reverseN(node,3);
 //        demo.print(reverseN01);
@@ -35,6 +35,7 @@ public class ReversePartSinglyLinkedList {
         head.next = reverseBetween(head.next, m-1, n-1);
         return head;
     }
+
 
     /**
      * 翻转前N个节点
