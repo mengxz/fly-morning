@@ -55,4 +55,8 @@ public class FastThreadFinish {
             return "re=="+Thread.currentThread().getName();
         }
     }
+
+    public class ThreadDemo extends Thread{
+
+    }
 }

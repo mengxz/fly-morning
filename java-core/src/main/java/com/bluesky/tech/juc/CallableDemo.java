@@ -2,9 +2,9 @@ package com.bluesky.tech.juc;
 
 import com.google.common.base.Stopwatch;
 
-import java.util.concurrent.Callable;
-import java.util.concurrent.FutureTask;
-import java.util.concurrent.TimeUnit;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.concurrent.*;
 
 class MyCallable implements Callable<Integer> {
 
@@ -21,13 +21,30 @@ class MyCallable implements Callable<Integer> {
     }
 }
 
+class MyCallableTask implements Callable<String> {
+    private int id;
+    public MyCallableTask(int id){
+        this.id = id;
+    }
+    @Override
+    public String call() throws Exception {
+        for(int i = 0;i<id;i++){
+            System.out.println("Thread--"+ id+"--i:"+i);
+            Thread.sleep(1000);
+        }
+        return "Result of callable: "+id;
+    }
+}
+
 //@Slf4j
 public class CallableDemo {
 
-    public static void main(String[] args){
-        test01();
+    public static void main(String[] args)throws Exception{
+        //test01();
         //test02();
         //test03();
+        //test04();
+        test05();
     }
 
     private static void test01() {
@@ -45,6 +62,10 @@ public class CallableDemo {
         }
     }
 
+    /**
+     * Callable两种执行方式
+     * 方式1:借助FutureTask执行
+     */
     private static void test02() {
         FutureTask<Integer> futureTask = new FutureTask<>(new MyCallable());
         Stopwatch stopwatch = Stopwatch.createStarted();
@@ -77,5 +98,43 @@ public class CallableDemo {
             e.printStackTrace();
         }
         System.out.println("time2:"+stopwatch.elapsed(TimeUnit.MILLISECONDS));
+    }
+
+    /**
+     * Callable两种执行方式
+     * 方式2:借助线程池来运行
+     */
+    private static void test04()throws Exception {
+        ExecutorService exec = Executors.newCachedThreadPool();
+        System.out.println(new Date());
+        Future<Integer> future = exec.submit(new MyCallable());
+        System.out.println("future:"+future.get()+",time:"+new Date());
+        exec.shutdown();
+    }
+
+    /**
+     * 参考:https://blog.csdn.net/m0_37204491/article/details/87930790
+     * 当执行多个Callable任务，有多个返回值时，我们可以创建一个Future的集合
+     */
+    public static void test05() throws Exception{
+        ExecutorService exec = Executors.newCachedThreadPool();
+        ArrayList<Future<String>> results = new ArrayList<Future<String>>();
+
+        for (int i = 0; i < 5; i++) {
+            results.add(exec.submit(new MyCallableTask(i)));
+        }
+        TimeUnit.SECONDS.sleep(2);
+        for (Future<String> fs : results) {
+            if (fs.isDone()) {
+                try {
+                    System.out.println(fs.get());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            } else {
+                System.out.println("MyCallableTask任务未完成！");
+            }
+        }
+        exec.shutdown();
     }
 }

@@ -1,0 +1,29 @@
+参考:https://developer.aliyun.com/article/128032
+
+public class FutureTask<V> implements RunnableFuture<V> {
+     /*
+     * FutureTask中定义了一个state变量，用于记录任务执行的相关状态 ，状态的变化过程如下
+     * NEW -> COMPLETING -> NORMAL
+     * NEW -> COMPLETING -> EXCEPTIONAL
+     * NEW -> CANCELLED
+     * NEW -> INTERRUPTING -> INTERRUPTED
+     */
+    private volatile int state;
+    //主流程状态
+    private static final int NEW = 0; //当FutureTask实例刚刚创建到callbale的call方法执行完成前，处于此状态
+    private static final int COMPLETING  = 1; //callable的call方法执行完成或出现异常时，首先进行此状态
+    private static final int NORMAL    = 2;//callable的call方法正常结束时，进入此状态，将outcom设置为正常结果
+    private static final int EXCEPTIONAL = 3;//callable的call方法异常结束时，进入此状态，将outcome设置为抛出的异常
+    //取消任务执行时可能处于的状态
+    private static final int CANCELLED= 4;// FutureTask任务尚未执行，即还在任务队列的时候，调用了cancel方法，进入此状态
+    private static final int INTERRUPTING = 5;// FutureTask的run方法已经在执行，收到中断信号，进入此状态
+    private static final int INTERRUPTED  = 6;// 任务成功中断后，进入此状态
+    
+    private Callable<V> callable;//需要执行的任务，提示：如果提交的是Runnable对象，会先转换为Callable对象，这是构造方法参数
+    private Object outcome; //任务运行的结果
+    private volatile Thread runner;//执行此任务的线程
+  
+    //等待该FutureTask的线程链表，对于同一个FutureTask，如果多个线程调用了get方法，对应的线程都会加入到waiters链表中，同时当FutureTask执行完成后，也会告知所有waiters中的线程
+    private volatile WaitNode waiters;
+    ......
+}

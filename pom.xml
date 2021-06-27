@@ -17,6 +17,7 @@
       <module>java-design-patterns</module>
     <module>java-jvm</module>
       <module>java-md</module>
+      <module>springboot-kafka</module>
   </modules>
   <packaging>pom</packaging>
 
